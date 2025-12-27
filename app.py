@@ -5,6 +5,7 @@ from PIL import Image
 st.set_page_config(page_title="ZERO AI WORLD", layout="centered")
 st.title("🤖 ZERO: THE TWIN AI")
 
+# Your working API Key
 genai.configure(api_key="AIzaSyBxYGRpnMggCdPY9pA2rtyWBib7N9KLJlc")
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -34,4 +35,4 @@ if prompt := st.chat_input("Ask ZERO..."):
                 st.markdown(response.text)
                 st.session_state.messages.append({"role": "assistant", "content": response.text})
             except Exception as e:
-                st.error("Error connected to API. Please check your Key.")
+                st.error("Connection Error. Please try again.")
