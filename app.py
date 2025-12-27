@@ -24,11 +24,14 @@ if prompt := st.chat_input("Ask ZERO..."):
 
     with st.chat_message("assistant"):
         with st.spinner("Wait..."):
-            if uploaded_file:
-                img = Image.open(uploaded_file)
-                response = model.generate_content([prompt, img])
-            else:
-                response = model.generate_content(prompt)
-            
-            st.markdown(response.text)
-            st.session_state.messages.append({"role": "assistant", "content": response.text})
+            try:
+                if uploaded_file:
+                    img = Image.open(uploaded_file)
+                    response = model.generate_content([prompt, img])
+                else:
+                    response = model.generate_content(prompt)
+                
+                st.markdown(response.text)
+                st.session_state.messages.append({"role": "assistant", "content": response.text})
+            except Exception as e:
+                st.error("Error connected to API. Please check your Key.")
